@@ -1,12 +1,19 @@
-package com.company;
+package com.company.Models;
+
+import com.company.Interfaces.Observable;
 
 import java.util.ArrayList;
 
-public class RadioStation implements Observable  {
-  String name;
+public class RadioStation implements Observable {
+  private String name;
   float frequency;
-  ArrayList<Man> audience;
+  private ArrayList<Man> audience ;
 
+  public RadioStation(String name){
+      this.name =name;
+      audience = new ArrayList<>();
+
+  }
     @Override
     public void addObserver(Man man) {
         audience.add(man);
@@ -23,7 +30,7 @@ public class RadioStation implements Observable  {
             for(int i=0;i<countLoop;++i){
          //   broadcast();
                 for(Man man : audience){
-                    man.listen();
+                    man.listen(name);
                 }
       }
   }
