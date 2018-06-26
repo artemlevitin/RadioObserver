@@ -3,7 +3,8 @@ package com.company.Interfaces;
 import com.company.Models.Man;
 
 public interface Observable {
-   void addObserver(Man man);
-   void remObserver(Man man);
    void onAir();
+   void addObserver(Observer obs);
+   void remObserver(Observer obs);
+
 }

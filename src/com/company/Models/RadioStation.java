@@ -1,42 +1,50 @@
 package com.company.Models;
 
 import com.company.Interfaces.Observable;
+import com.company.Interfaces.Observer;
 
 import java.util.ArrayList;
 
 public class RadioStation implements Observable {
   private String name;
   float frequency;
-  private ArrayList<Man> audience ;
-
-  public RadioStation(String name){
+  private ArrayList<Observer> audiences ;
+  private ArrayList<Song> songs;
+  public RadioStation(String name, float frequency){
       this.name =name;
-      audience = new ArrayList<>();
-
+      this.frequency = frequency;
+      audiences = new ArrayList<>();
+      songs = new ArrayList<>();
   }
+
+  public void addSongs(Song song){
+      songs.add(song);
+  }
+
     @Override
-    public void addObserver(Man man) {
-        audience.add(man);
+    public void addObserver(Observer obs) {
+        audiences.add(obs);
     }
 
     @Override
-    public void remObserver(Man man) {
-        audience.remove(man);
+    public void remObserver(Observer obs) {
+        audiences.remove(obs);
     }
-
     @Override
     public void onAir(){
-      int countLoop =10;
-            for(int i=0;i<countLoop;++i){
-         //   broadcast();
-                for(Man man : audience){
-                    man.listen(name);
-                }
-      }
-  }
+        //   broadcast();
 
-  class Song{
-        String name;
-        int duarationTima;
-  }
+            for(Song sng: songs) {
+                for (int curTime = 0; curTime <= sng.duaration; ++curTime) {
+                    for (Observer obs : audiences) {
+                        obs.listen(sng);
+                    }
+                }
+            }
+
+      }
+
+
 }
+
+

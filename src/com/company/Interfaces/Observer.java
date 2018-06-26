@@ -1,6 +1,7 @@
 package com.company.Interfaces;
 
-public interface Observer {
+import com.company.Models.Song;
 
-    void listen(String str);
+public interface Observer {
+    void listen(Song song);
 }

@@ -9,11 +9,11 @@ public class Man implements Observer {
    private String nameMan;
 
     public Man(String name) {
-        this.nameMan =name;
+        this.nameMan = name;
     }
 
     @Override
-   public void listen(String str){
-        PrintStream printf = System.out.printf("I'm %s and listen %s", nameMan, str);
+   public void listen(Song song){
+        PrintStream printf = System.out.printf("%s listen: %s \n", nameMan, song.nameSong);
     }
 }
