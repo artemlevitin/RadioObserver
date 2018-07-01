@@ -5,7 +5,7 @@ import com.company.Interfaces.Observer;
 
 import java.util.ArrayList;
 
-public class RadioStation implements Observable {
+public class RadioStation extends Thread  implements Observable {
   private String name;
   float frequency;
   private ArrayList<Observer> audiences ;
@@ -30,21 +30,29 @@ public class RadioStation implements Observable {
     public void remObserver(Observer obs) {
         audiences.remove(obs);
     }
-    @Override
-    public void onAir(){
-        //   broadcast();
 
-            for(Song sng: songs) {
-                for (int curTime = 0; curTime <= sng.duaration; ++curTime) {
-                    for (Observer obs : audiences) {
-                        obs.listen(sng);
-                    }
+    @Override
+    public void broadcast(){
+        for(Song sng: this.songs) {
+            for (int curTime = 0; curTime <= sng.duaration; ++curTime) {
+                for (Observer obs : audiences) {
+                    obs.listen(sng);
+
                 }
             }
+        }
+    }
 
+    public void onAir(){
+      System.out.println(name + " start translation ");
+          broadcast();
       }
 
 
+    @Override
+    public void run() {
+       onAir();
+    }
 }
 
 
